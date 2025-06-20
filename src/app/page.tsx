@@ -8,9 +8,9 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('register'); // Track which tab is active
 
   return (
-    <div className="container-fluid min-vh-100">
+    <div className="container-fluid min-vh-100" style={{ margin: 0, padding: 0}}>
       {/* Header with custom styles */}
-      <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#0a2d3d' }}>
+      <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#0a2d3d', margin: 0 }}>
         <div className="container-fluid">
           <a className="navbar-brand" href="#" style={{ color: 'white' }}>Student Portal</a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

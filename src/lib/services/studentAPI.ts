@@ -22,6 +22,12 @@ export const updateStudent = async (updatedStudent: Student): Promise<Student> =
   return response.data;
 };
 
+// Delete a student
+export const deleteStudent = async (studentId: string): Promise<void> => {
+  const response = await axios.delete(`${API_URL}/${studentId}`);
+  return response.data;
+};
+
 // Custom hook to fetch students using React Query
 export const useFetchStudents = () => {
   return useQuery({
@@ -41,5 +47,15 @@ export const useAddStudent = () => {
 export const useUpdateStudent = () => {
   return useMutation({
     mutationFn: updateStudent,
+  });
+};
+
+// Custom hook to delete a student using React Query
+export const useDeleteStudent = () => {
+  return useMutation({
+    mutationFn: deleteStudent,
+    onSuccess: () => {
+      // Optionally you can trigger a refetch of students after deletion
+    },
   });
 };
