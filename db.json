@@ -17,11 +17,21 @@
       "age": 30,
       "gender": "Male",
       "courses": [
-        "Physics",
         "CS"
       ],
       "consent": true,
       "id": "8b06"
+    },
+    {
+      "id": "2b36",
+      "fullName": "David Isaac Tisan",
+      "email": "tissan300@gmail.com",
+      "age": 16,
+      "gender": "Male",
+      "courses": [
+        "Math"
+      ],
+      "consent": true
     }
   ]
 }

@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { z } from 'zod';
@@ -41,6 +39,18 @@ const validationSchema = z.object({
         .refine(val => val === true, 'Consent is required')
 });
 
+// Validation function to integrate Zod with Formik
+const validateForm = (values: Student) => {
+    const result = validationSchema.safeParse(values);
+    const errors: Record<string, string> = {};
+    if (!result.success) {
+        result.error.errors.forEach((err) => {
+            errors[err.path[0]] = err.message;
+        });
+    }
+    return errors;
+};
+
 const StudentRegistrationForm = ({ student, onSubmitSuccess }: { student?: Student, onSubmitSuccess: () => void }) => {
     const [alertMessage, setAlertMessage] = useState<string | null>(null);
     const [alertType, setAlertType] = useState<string>('');
@@ -50,18 +60,6 @@ const StudentRegistrationForm = ({ student, onSubmitSuccess }: { student?: Stude
     const queryClient = useQueryClient();
 
     const handleSubmit = async (values: Student) => {
-        const result = validationSchema.safeParse(values);
-
-        if (!result.success) {
-            const errorObj: Record<string, string> = {};
-            result.error.errors.forEach((err) => {
-                errorObj[err.path[0]] = err.message;
-            });
-            setAlertMessage('There are some errors in your form. Please fix them and submit again.');
-            setAlertType('danger');
-            return;
-        }
-
         if (student) {
             const updatedStudent = { ...values, id: student.id };
             updateStudentMutation(updatedStudent, {
@@ -85,7 +83,7 @@ const StudentRegistrationForm = ({ student, onSubmitSuccess }: { student?: Stude
                     dispatch(addStudent(data));
                     setAlertMessage('Student added successfully!');
                     setAlertType('success');
-                     setTimeout(() => {
+                    setTimeout(() => {
                         onSubmitSuccess();
                     }, 1500);
                 },
@@ -116,6 +114,7 @@ const StudentRegistrationForm = ({ student, onSubmitSuccess }: { student?: Stude
                     courses: student?.courses || [],
                     consent: student?.consent || false,
                 }}
+                validate={validateForm}  // Using the validate function for Zod validation
                 onSubmit={handleSubmit}
             >
                 {({ values, handleChange, handleBlur, touched, errors }) => (
@@ -184,7 +183,6 @@ const StudentRegistrationForm = ({ student, onSubmitSuccess }: { student?: Stude
                             </Field>
                             <ErrorMessage name="gender" component="div" className="invalid-feedback" />
                         </div>
-
                         <div className="mb-3">
                             <label className="form-label" style={{ fontSize: '1.2rem', color: '#0a2d3d' }}>Courses</label>
                             <div className="form-check">
@@ -192,7 +190,7 @@ const StudentRegistrationForm = ({ student, onSubmitSuccess }: { student?: Stude
                                     type="checkbox"
                                     id="Math"
                                     name="courses"
-                                    value="Math"
+                                    value={Course.Math}
                                     className="form-check-input"
                                     checked={values.courses.includes(Course.Math)}
                                     onChange={handleChange}
@@ -204,7 +202,7 @@ const StudentRegistrationForm = ({ student, onSubmitSuccess }: { student?: Stude
                                     type="checkbox"
                                     id="Physics"
                                     name="courses"
-                                    value="Physics"
+                                    value={Course.Physics}
                                     className="form-check-input"
                                     checked={values.courses.includes(Course.Physics)}
                                     onChange={handleChange}
@@ -216,7 +214,7 @@ const StudentRegistrationForm = ({ student, onSubmitSuccess }: { student?: Stude
                                     type="checkbox"
                                     id="CS"
                                     name="courses"
-                                    value="CS"
+                                    value={Course.CS}
                                     className="form-check-input"
                                     checked={values.courses.includes(Course.CS)}
                                     onChange={handleChange}
@@ -228,14 +226,19 @@ const StudentRegistrationForm = ({ student, onSubmitSuccess }: { student?: Stude
                                     type="checkbox"
                                     id="Literature"
                                     name="courses"
-                                    value="Literature"
+                                    value={Course.Literature}
                                     className="form-check-input"
                                     checked={values.courses.includes(Course.Literature)}
                                     onChange={handleChange}
                                 />
                                 <label htmlFor="Literature" className="form-check-label">Literature</label>
                             </div>
-                            <ErrorMessage name="courses" component="div" className="invalid-feedback" />
+                            {/* Display error message for courses */}
+                            {touched.courses && errors.courses && (
+                                <div className="invalid-feedback" style={{ display: 'block' }}>
+                                    {errors.courses}
+                                </div>
+                            )}
                         </div>
 
                         <div className="mb-3">
@@ -250,8 +253,14 @@ const StudentRegistrationForm = ({ student, onSubmitSuccess }: { student?: Stude
                                 />
                                 <label htmlFor="consent" className="form-check-label">I accept the terms and conditions</label>
                             </div>
-                            <ErrorMessage name="consent" component="div" className="invalid-feedback" />
+                            {/* Display error message for consent */}
+                            {touched.consent && errors.consent && (
+                                <div className="invalid-feedback" style={{ display: 'block' }}>
+                                    {errors.consent}
+                                </div>
+                            )}
                         </div>
+
 
                         <button
                             type="submit"
