@@ -79,8 +79,8 @@ const StudentListPage = () => {
             {isLoading && <div className="text-center">Loading...</div>}
 
             {/* Table to display students */}
-            {!isLoading && !isError && (students.length > 0 || data) && (
-                <div className="table-container" style={{ overflowX: 'auto', }}>
+            <div className="table-container" style={{ overflowX: 'auto' }}>
+                {!isLoading && !isError && (students.length > 0 || data) ? (
                     <table className="table table-striped table-bordered table-hover shadow-sm rounded w-100">
                         <thead className="table-dark">
                             <tr>
@@ -89,7 +89,7 @@ const StudentListPage = () => {
                                 <th>Age</th>
                                 <th>Gender</th>
                                 <th>Courses</th>
-                                <th>Actions</th> {/* Actions Column for Edit/Delete */}
+                                <th>Actions</th> 
                             </tr>
                         </thead>
                         <tbody>
@@ -118,8 +118,11 @@ const StudentListPage = () => {
                             ))}
                         </tbody>
                     </table>
-                </div>
-            )}
+                ) : (
+                    <p>No data available</p> // Optional fallback message
+                )}
+            </div>
+
 
             {/* If no students */}
             {!isLoading && !isError && students.length === 0 && (
