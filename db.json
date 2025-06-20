@@ -1,0 +1,108 @@
+{
+  "students": [
+    {
+      "fullName": "Daniel Isaac Tinat",
+      "email": "tissan300@gmail.com",
+      "age": 23,
+      "gender": "Male",
+      "courses": [
+        "Literature"
+      ],
+      "consent": true,
+      "id": "c34a"
+    },
+    {
+      "fullName": "David Isaac TDuke",
+      "email": "tissan00@gmail.com",
+      "age": 20,
+      "gender": "Male",
+      "courses": [
+        "CS",
+        "Physics"
+      ],
+      "consent": true,
+      "id": "af24"
+    },
+    {
+      "fullName": "Cena Snail",
+      "email": "john@gmail.com",
+      "age": 20,
+      "gender": "Male",
+      "courses": [
+        "Physics",
+        "CS"
+      ],
+      "consent": true,
+      "id": "8b06"
+    },
+    {
+      "fullName": "Daniel Isaac",
+      "email": "tissan300@gmail.com",
+      "age": 30,
+      "gender": "Male",
+      "courses": [
+        "Physics"
+      ],
+      "consent": true,
+      "id": "a810"
+    },
+    {
+      "fullName": "jASON Start",
+      "email": "json@gmail.com",
+      "age": 31,
+      "gender": "Male",
+      "courses": [
+        "Math",
+        "CS",
+        "Literature",
+        "Physics"
+      ],
+      "consent": true,
+      "id": "b04f"
+    },
+    {
+      "id": "a528",
+      "fullName": "modal notification",
+      "email": "tissan3sa00@gmail.com",
+      "age": 16,
+      "gender": "Female",
+      "courses": [
+        "Literature"
+      ],
+      "consent": true
+    },
+    {
+      "id": "c099",
+      "fullName": "vbc",
+      "email": "tissan300@gmail.com",
+      "age": 16,
+      "gender": "Male",
+      "courses": [
+        "Math"
+      ],
+      "consent": true
+    },
+    {
+      "id": "c558",
+      "fullName": "Mine",
+      "email": "sfs@gmail.com",
+      "age": 16,
+      "gender": "Male",
+      "courses": [
+        "Literature"
+      ],
+      "consent": true
+    },
+    {
+      "id": "7ea3",
+      "fullName": "fsv vvvd",
+      "email": "tissan300@gmail.com",
+      "age": 16,
+      "gender": "Male",
+      "courses": [
+        "Math"
+      ],
+      "consent": true
+    }
+  ]
+}
